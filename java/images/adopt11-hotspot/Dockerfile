@@ -41,7 +41,7 @@ gpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public\
 " > /etc/yum.repos.d/adoptopenjdk.repo \
   && yum install -y --setopt=skip_missing_names_on_install=False \
        unzip rsync \
-       adoptopenjdk-11-openj9 \
+       adoptopenjdk-11-hotspot \
   && yum clean all \
   && curl https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz | \
     tar -xzf - -C /opt \
@@ -55,7 +55,7 @@ ENV JAVA_HOME /etc/alternatives/jre
 
 
 # Use /dev/urandom to speed up startups & Add jboss user to the root group
-RUN echo securerandom.source=file:/dev/urandom >> /usr/lib/jvm/adoptopenjdk-11-openj9/conf/security/java.security \
+RUN echo securerandom.source=file:/dev/urandom >> /usr/lib/jvm/adoptopenjdk-11-hotspot/conf/security/java.security \
  && usermod -g root -G jboss jboss
 
 # Prometheus JMX exporter agent
